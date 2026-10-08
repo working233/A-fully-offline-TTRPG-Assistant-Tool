@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>本地跑团辅助工具 · Web 编辑器</title>
+<link rel="stylesheet" href="./css/app.css" />
+</head>
+<body>
+<div id="app">
+  <!-- 酒馆氛围层：两盏摇曳的烛火，纯装饰，对读屏隐藏 -->
+  <div class="ambience" aria-hidden="true">
+    <span class="lantern lantern-a"></span>
+    <span class="lantern lantern-b"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">TRPG</div>
+      <div class="brand-text">
+        <strong>本地跑团辅助工具</strong>
+        <span id="data-root">数据目录加载中…</span>
+      </div>
+    </div>
+
+    <label class="campaign-select">
+      <span>当前跑团</span>
+      <select id="campaign-select"></select>
+    </label>
+
+    <nav class="nav" id="nav">
+      <button class="nav-item" data-view="campaigns">跑团管理</button>
+      <button class="nav-item" data-view="characters">角色卡</button>
+      <button class="nav-item" data-view="monsters">怪物卡</button>
+      <button class="nav-item active" data-view="dice">骰子系统</button>
+      <button class="nav-item" data-view="stories">剧情编辑器</button>
+      <button class="nav-item" data-view="files">文件与笔记</button>
+      <button class="nav-item" data-view="records">跑团记录</button>
+      <button class="nav-item" data-view="trash">回收站 / 备份</button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="dot" id="status-dot"></div>
+      <span id="status-text">本地服务运行中</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="view-title">骰子系统</h1>
+        <p id="view-sub">所有数据保存在本机，不上传任何云端</p>
+      </div>
+      <div class="topbar-actions" id="topbar-actions"></div>
+    </header>
+    <section class="content" id="content"></section>
+  </main>
+</div>
+<div id="toast" class="toast"></div>
+<script src="./js/api.js"></script>
+<script src="./js/views.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>

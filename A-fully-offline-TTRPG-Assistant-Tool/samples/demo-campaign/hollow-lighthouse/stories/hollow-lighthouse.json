@@ -1,0 +1,161 @@
+{
+  "id": "st-4b90c2",
+  "title": "空心灯塔",
+  "system": "COC 7th",
+  "synopsis": "熄灭十七年的灯塔重新亮起。调查者需在三个开场线索中选择一条推进，在顶层面对「灯芯」的真相；是否拿到铜钥匙与是否理解母亲的歌谣决定你能否真正熄灭它。",
+  "version": 7,
+  "start_node": "arrive",
+  "flags": {
+    "has_brass_key": false,
+    "knows_lullaby": false,
+    "seen_the_light": false,
+    "trust_lighthouse_keeper": false
+  },
+  "nodes": [
+    {
+      "id": "arrive",
+      "type": "main",
+      "title": "抵达 Kingsport",
+      "text": "傍晚六点，海雾裹着咸腥扑进站台。汽笛声比你记忆里低了整整一个调。站台上没有人来接你，只有一张被雨水泡皱的纸条留在行李推车上：「别在天黑后看那盏灯。」",
+      "tags": ["开场", "氛围"],
+      "effects": [],
+      "choices": [],
+      "next": "keeper_greeting",
+      "position": { "x": 60, "y": 200 }
+    },
+    {
+      "id": "keeper_greeting",
+      "type": "main",
+      "title": "守灯人：老霍华德",
+      "text": "灯塔管理员霍华德·佩里，七十三岁，右手少了两根手指。他把门开了一条缝：「灯昨天自己亮了。我什么都没做。」成功心理学检定可察觉他在隐瞒某事；成功侦查检定可注意到他袖口沾着新鲜的藻绿色污渍。",
+      "tags": ["NPC", "情报"],
+      "effects": [{ "type": "flag", "flag": "seen_the_light", "value": true }],
+      "choices": [
+        { "id": "c_press", "label": "逼问他隐瞒了什么", "target": "tavern", "condition": null, "effects": [] },
+        { "id": "c_calm", "label": "温和安抚，取得信任", "target": "archive", "condition": null,
+          "effects": [{ "type": "flag", "flag": "trust_lighthouse_keeper", "value": true }] }
+      ],
+      "next": "investigation_hub",
+      "position": { "x": 340, "y": 200 }
+    },
+    {
+      "id": "investigation_hub",
+      "type": "branch",
+      "title": "三条线索",
+      "text": "天还没全黑。你有大约两小时可以行动，选一条线走下去。",
+      "tags": ["调查", "分支"],
+      "effects": [],
+      "choices": [
+        { "id": "c_archive", "label": "去市政档案馆查十七年的日志", "target": "archive", "condition": null, "effects": [] },
+        { "id": "c_tavern", "label": "去码头酒馆打听 Sodium 号沉船", "target": "tavern", "condition": null, "effects": [] },
+        { "id": "c_climb", "label": "不等天黑，直接夜探灯塔", "target": "climb", "condition": null, "effects": [] }
+      ],
+      "next": null,
+      "position": { "x": 620, "y": 200 }
+    },
+    {
+      "id": "archive",
+      "type": "main",
+      "title": "档案馆：1910 年的失踪报告",
+      "text": "泛黄的登记簿上，1910 年 11 月 3 日那一页被人整齐地撕掉了。但复写纸的第二联留下了压痕：最后一条值班记录写着「灯芯已换，上帝宽恕我们」。抽屉深处压着一把黄铜钥匙，齿纹里全是盐。",
+      "tags": ["线索", "道具"],
+      "effects": [
+        { "type": "flag", "flag": "has_brass_key", "value": true },
+        { "type": "san", "value": "0/1d3" }
+      ],
+      "choices": [],
+      "next": "top_floor",
+      "position": { "x": 900, "y": 80 }
+    },
+    {
+      "id": "tavern",
+      "type": "main",
+      "title": "沉锚酒馆：醉汉的低语",
+      "text": "酒保擦着杯子：「Sodium 号？沉了十七年，捞上来的东西没人要。」角落的老水手忽然抓住你的手腕，唱起一支走调的摇篮曲：「海在下面看着我们……睡吧，睡吧。」成功聆听检定可记住旋律。",
+      "tags": ["线索", "氛围", "NPC"],
+      "effects": [{ "type": "flag", "flag": "knows_lullaby", "value": true }],
+      "choices": [],
+      "next": "top_floor",
+      "position": { "x": 900, "y": 200 }
+    },
+    {
+      "id": "climb",
+      "type": "main",
+      "title": "夜探灯塔（无准备）",
+      "text": "你趁着退潮爬上礁石，从破损的窗缝挤进塔身。螺旋梯上没有脚印，却湿得像刚有人赤脚走过。二楼传来缓慢的、带着黏液声的呼吸。",
+      "tags": ["遭遇", "高风险"],
+      "effects": [{ "type": "san", "value": "1/1d6" }],
+      "choices": [],
+      "next": "top_floor",
+      "position": { "x": 900, "y": 320 }
+    },
+    {
+      "id": "top_floor",
+      "type": "branch",
+      "title": "灯室：的心脏",
+      "text": "顶层的巨大透镜后不是电灯，而是一颗缓慢搏动的、青灰色的器官。每一次收缩，整座塔就亮一秒。它转向你，像认出了谁。地板上摆着一只不属于任何现代规格的铁盒。",
+      "tags": ["高潮", "遭遇"],
+      "effects": [{ "type": "san", "value": "1/1d10" }],
+      "choices": [
+        { "id": "c_song", "label": "唱出那支摇篮曲", "target": "ending_extinguish",
+          "condition": { "type": "flag", "flag": "knows_lullaby", "equals": true }, "effects": [] },
+        { "id": "c_key", "label": "用黄铜钥匙打开铁盒", "target": "ending_compromise",
+          "condition": { "type": "flag", "flag": "has_brass_key", "equals": true }, "effects": [] },
+        { "id": "c_flee", "label": "什么都不做，转身逃下楼", "target": "ending_flee", "condition": null, "effects": [] },
+        { "id": "c_burn", "label": "用随身火油烧掉它", "target": "ending_sunken", "condition": null, "effects": [] }
+      ],
+      "next": null,
+      "position": { "x": 1180, "y": 200 }
+    },
+    {
+      "id": "ending_extinguish",
+      "type": "ending",
+      "ending_type": "good",
+      "title": "结局：灯终于灭了",
+      "text": "你唱完最后一个音，那东西停止了搏动。海水退去，露出礁石上一排十七年前的脚印，它们一直通向陆地。你父亲没能走完的那段路，有人替他走完了。",
+      "tags": ["结局"],
+      "effects": [{ "type": "san_recovery", "value": "1d6" }],
+      "choices": [],
+      "next": null,
+      "position": { "x": 1480, "y": 60 }
+    },
+    {
+      "id": "ending_compromise",
+      "type": "ending",
+      "ending_type": "neutral",
+      "title": "结局：交易",
+      "text": "盒子里是一沓按了手印的契约，七十三年前签下的：每年一个姓氏。你看到了自己的姓。器官停止收缩，灯塔熄灭——但你知道它只是在等下一个接班人。",
+      "tags": ["结局"],
+      "effects": [{ "type": "san", "value": "1d6/2d6" }],
+      "choices": [],
+      "next": null,
+      "position": { "x": 1480, "y": 180 }
+    },
+    {
+      "id": "ending_flee",
+      "type": "ending",
+      "ending_type": "open",
+      "title": "结局：跑掉的人",
+      "text": "你逃下山时，背后的光很有节奏地亮了三下——有人后来告诉你，那是告别的意思。你活下来了，但每晚都能听见背后有节奏的光。",
+      "tags": ["结局"],
+      "effects": [{ "type": "san", "value": "1/1d4" }],
+      "choices": [],
+      "next": null,
+      "position": { "x": 1480, "y": 300 }
+    },
+    {
+      "id": "ending_sunken",
+      "type": "ending",
+      "ending_type": "bad",
+      "title": "结局：归航",
+      "text": "火油泼上去的瞬间，整座塔发出像是 relieved 的长叹。你在下坠中看见海面上升起了第二盏灯——然后你意识到，那不是灯，是很多很多双眼睛同时睁开了。",
+      "tags": ["结局", "死亡/疯狂"],
+      "effects": [{ "type": "san", "value": "2d10/1d100" }],
+      "choices": [],
+      "next": null,
+      "position": { "x": 1480, "y": 420 }
+    }
+  ],
+  "created_at": "2026-01-15T22:00:00+08:00",
+  "updated_at": "2026-09-21T15:00:00+08:00"
+}

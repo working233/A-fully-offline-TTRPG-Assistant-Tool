@@ -1,0 +1,30 @@
+{
+  "title": "Kingsport 灯塔 · 首层与灯室",
+  "image": "kingsport-lighthouse.png",
+  "grid": {
+    "mode": "hex",
+    "cell_size": 72,
+    "offset": { "x": 0, "y": 0 },
+    "columns": 22,
+    "rows": 16,
+    "snap": true
+  },
+  "lighting": {
+    "enabled": true,
+    "ambient": "#0f172a",
+    "sources": [
+      { "id": "l1", "x": 11, "y": 8, "radius": 9, "color": "#fbbf24", "type": "torch", "flicker": true, "label": "灯室核心" },
+      { "id": "l2", "x": 4, "y": 12, "radius": 4, "color": "#38bdf8", "type": "cold", "flicker": false, "label": "渗水的地窖" }
+    ]
+  },
+  "fog": {
+    "enabled": true,
+    "revealed": [[9, 7], [10, 7], [11, 7], [9, 8], [10, 8], [11, 8], [12, 8]],
+    "mode": "explore"
+  },
+  "tokens": [
+    { "id": "tk1", "name": "深潜者混血", "x": 11, "y": 9, "size": 1, "hidden": true, "ref": "monsters/deep-one-hybrid.json" },
+    { "id": "tk2", "name": "老霍华德", "x": 5, "y": 11, "size": 1, "hidden": false, "ref": null }
+  ],
+  "notes": "底图尚未导入：把同名 png 放进 maps/ 目录后即可显示。"
+}

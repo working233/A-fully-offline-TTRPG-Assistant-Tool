@@ -1,0 +1,15 @@
+{
+  "id": "hollow-lighthouse",
+  "name": "空心灯塔",
+  "system": "COC 7th",
+  "description": "1923 年新英格兰海岸，一座熄灭了十七年的灯塔重新亮起，而它照亮的似乎是海面之下。",
+  "dm": "守灯人",
+  "created_at": "2026-01-10T20:00:00+08:00",
+  "updated_at": "2026-09-21T15:00:00+08:00",
+  "folder_version": 1,
+  "players": ["老白", "柠檬", "K"],
+  "settings": {
+    "dice_history_limit": 500,
+    "auto_backup": true
+  }
+}
